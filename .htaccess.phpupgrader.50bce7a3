@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+
+  RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule !.*\.php$ %{REQUEST_FILENAME}.php [QSA,L]
+
+  RewriteCond %{HTTP_HOST} ^www.website.com
+  RewriteRule (.*) https://website.com/$1 [R=301,L]
+
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+</IfModule>
